@@ -5,7 +5,9 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    fontFamily: ['Mooli', 'sans-serif'],
+    fontFamily: {
+      mooli: ['Mooli, sans-serif']
+    },
     extend: {},
   },
   plugins: [
