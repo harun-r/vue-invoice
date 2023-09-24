@@ -3,5 +3,8 @@
 @tailwind utilities;
 
 // own helpers
+// Native components
+@import "./components/buttons";
 //own components
-
+@import "./layouts/layout";
+@import "./layouts/sidebar";

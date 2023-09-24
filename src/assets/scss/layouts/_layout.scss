@@ -1,0 +1,11 @@
+.main-layout{
+  @apply min-h-screen bg-gray-200;
+  @apply flex;
+
+  .sidebar{
+    @apply w-24 bg-cyan-600
+  }
+  .main-container{
+    @apply flex-1 p-12
+  }
+}

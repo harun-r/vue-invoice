@@ -1,0 +1,13 @@
+.base-default{
+  @apply flex items-center text-base rounded px-3 py-2;
+
+
+  //Button Fill mode
+  &.button-solid{
+    @apply bg-gray-400
+  }
+  &.button-outline{
+    @apply border border-gray-500
+  }
+  &.button-flat{}
+}

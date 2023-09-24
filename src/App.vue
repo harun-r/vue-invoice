@@ -1,5 +1,7 @@
 <template>
-  <RouterView/>
+  <MainLayout>
+    <RouterView/>
+  </MainLayout>
 </template>
 
 <style lang="scss">
@@ -8,5 +10,6 @@
 
 <script setup>
 import { RouterView} from 'vue-router'
+import MainLayout from "@/components/layouts/MainLayout.vue";
 </script>
 
