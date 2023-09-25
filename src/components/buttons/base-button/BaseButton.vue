@@ -10,6 +10,14 @@ const props = defineProps({
   buttonTheme: {
     type: String,
     default: 'base'
+  },
+  buttonRadius: {
+    type: String,
+    default: 'small'
+  },
+  buttonSize: {
+    type: String,
+    default: 'medium'
   }
 });
 
@@ -29,6 +37,7 @@ const checkButtonFill = (fill) => {
   }
 }
 
+
 // Button Theme Color
 const buttonTheme = computed(() => {
   return checkButtonTheme(props.buttonTheme)
@@ -47,11 +56,42 @@ const checkButtonTheme = (theme) => {
     return 'button-light'
   }
 }
+
+// Button Round
+const buttonRadius = computed(() => {
+  return checkButtonRadius(props.buttonRadius)
+})
+const checkButtonRadius = (round) => {
+  if (round === 'small') {
+    return 'rounded'
+  }
+  if (round === 'pill') {
+    return 'rounded-full'
+  }
+}
+
+// Button Size
+const buttonSize = computed(()=>{
+  return checkButtonSize(props.buttonSize)
+})
+const checkButtonSize = (size) => {
+  if (size === 'small') {
+    return 'button-small'
+  }
+  if (size === 'medium') {
+    return 'button-medium'
+  }
+  if (size === 'large') {
+    return 'button-large'
+  }
+}
+
 </script>
 
 <template>
-  <button ref="button" :class="`base-default ${buttonFillMode}`">
-    <span class="material-symbols-outlined" v-if="iconName">{{ iconName }}</span>
+  <button ref="button"
+          :class="`base-default ${buttonFillMode} ${buttonTheme} ${buttonRadius} ${buttonSize}`">
+    <span class="material-symbols-outlined mr-1" v-if="iconName">{{ iconName }}</span>
     <slot>button</slot>
   </button>
 </template>

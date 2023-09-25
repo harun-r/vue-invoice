@@ -6,14 +6,15 @@
         <p>There are 5 total invoices</p>
       </div>
       <div class="right flex items-center">
-        <div class="filter flex items-center mr-3">
+        <div class="flex items-center mr-3">
           <p class="mr-3">Filter by:</p>
           <DropdownSelect :list-item="filterList" v-model="filterValue"/>
         </div>
         <BaseButton
             :icon-name="'add'"
-            :button-fill="'outline'"
-            :button-theme="'base'"
+            :button-fill="'flat'"
+            :button-theme="'primary'"
+            :button-radius="'pill'"
         >Create Invoice</BaseButton>
       </div>
     </div>
@@ -27,6 +28,10 @@ import {ref} from "vue";
 
 const filterValue = ref('')
 const filterList = ref([
+  {
+    key: 0,
+    value: 'select'
+  },
   {
     key: 1,
     value: '1'

@@ -12,7 +12,7 @@ defineEmits(['update:modelValue'])
 
 <template>
   <select ref="dropdown-select" :value="modelValue" @change="$emit('update:modelValue', $event.target.value)">
-    <option v-for="item in listItem" :key="item.key" :value="item.key">{{ item.value }}</option>
+    <option :selected="item.key === 0" v-for="item in listItem" :key="item.key" :value="item.key">{{ item.value }}</option>
   </select>
 </template>
 
