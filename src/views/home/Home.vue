@@ -3,7 +3,7 @@
     <div class="page-head flex items-start justify-between">
       <div class="left">
         <h3 class="text-2xl font-medium">Invoice</h3>
-        <p>There are 5 total invoices</p>
+        <p class="text-base text-gray-500">There are 5 total invoices</p>
       </div>
       <div class="right flex items-center">
         <div class="flex items-center mr-3">
