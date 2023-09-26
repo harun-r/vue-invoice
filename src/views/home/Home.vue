@@ -25,6 +25,7 @@
       />
     </div>
   </div>
+  <invoice-modal :modal-title="'New Invoice'"/>
 </template>
 
 <script setup>
@@ -32,6 +33,7 @@ import BaseButton from "@/components/buttons/base-button/BaseButton.vue";
 import DropdownSelect from "@/components/forms/dropdwon-select/DropdownSelect.vue";
 import {ref} from "vue";
 import InvoiceTable from "@/components/invoice-table/InvoiceTable.vue";
+import InvoiceModal from "@/components/invoice-modal/InvoiceModal.vue";
 
 const filterValue = ref('')
 const filterList = ref([
