@@ -15,8 +15,14 @@
             :button-fill="'flat'"
             :button-theme="'primary'"
             :button-radius="'pill'"
-        >Create Invoice</BaseButton>
+        >Create Invoice
+        </BaseButton>
       </div>
+    </div>
+    <div class="table-wrap mt-8">
+      <invoice-table
+          :data="data"
+      />
     </div>
   </div>
 </template>
@@ -25,6 +31,7 @@
 import BaseButton from "@/components/buttons/base-button/BaseButton.vue";
 import DropdownSelect from "@/components/forms/dropdwon-select/DropdownSelect.vue";
 import {ref} from "vue";
+import InvoiceTable from "@/components/invoice-table/InvoiceTable.vue";
 
 const filterValue = ref('')
 const filterList = ref([
@@ -49,7 +56,13 @@ const filterList = ref([
     value: '4'
   },
 ]);
-
+const data = ref([
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
+])
 </script>
 
 <style src="./Home.scss" scoped lang="scss"></style>
