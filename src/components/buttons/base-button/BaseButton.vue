@@ -55,6 +55,9 @@ const checkButtonTheme = (theme) => {
   if (theme === 'light') {
     return 'button-light'
   }
+  if (theme === 'danger') {
+    return 'button-danger'
+  }
 }
 
 // Button Round
@@ -71,7 +74,7 @@ const checkButtonRadius = (round) => {
 }
 
 // Button Size
-const buttonSize = computed(()=>{
+const buttonSize = computed(() => {
   return checkButtonSize(props.buttonSize)
 })
 const checkButtonSize = (size) => {

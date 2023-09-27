@@ -2,10 +2,10 @@
   @apply flex items-center;
 
   &.button-small{
-    @apply text-xs px-2 py-1
+    @apply text-xs px-4 py-2
   }
   &.button-medium{
-    @apply text-base px-3 py-2
+    @apply text-base px-4 py-2
   }
   &.button-large{
     @apply text-xl px-4 py-3
@@ -34,5 +34,8 @@
   }
   &.button-light{
     @apply bg-slate-100 text-gray-900
+  }
+  &.button-danger{
+    @apply bg-red-500 text-white
   }
 }
