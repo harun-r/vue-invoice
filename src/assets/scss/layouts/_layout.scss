@@ -6,6 +6,6 @@
     @apply w-24 bg-cyan-600 relative z-20
   }
   .main-container{
-    @apply flex-1 p-12
+    @apply flex-1 p-12 max-h-screen overflow-auto
   }
 }

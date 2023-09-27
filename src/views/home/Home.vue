@@ -65,11 +65,11 @@ const filterList = ref([
   },
 ]);
 const data = ref([
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
+  {id: 1, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
+  {id: 2, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
+  {id: 3, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
+  {id: 4, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
+  {id: 5, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
 ])
 
 // Invoice Modal
