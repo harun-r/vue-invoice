@@ -9,6 +9,7 @@ defineProps({
     type: String,
   }
 })
+const emit = defineEmits(['closeModal'])
 const filterValue = ref('')
 const filterList = ref([
   {
@@ -20,10 +21,15 @@ const filterList = ref([
     value: '60 days'
   },
 ]);
+
+// Modal Close
+const closeModal = () =>{
+  emit('closeModal')
+}
 </script>
 
 <template>
-  <div class="invoice-modal absolute top-0 left-0 w-full max-w-lg shadow-lg p-6 bg-gray-200 h-full">
+  <div class="invoice-modal absolute top-0 z-10 left-0 w-full max-w-lg shadow-lg p-6 bg-gray-200 h-full">
     <div class="head">
       <h3 class="text-2xl font-medium ">{{ modalTitle }}</h3>
     </div>
@@ -105,7 +111,7 @@ const filterList = ref([
       </form>
     </div>
     <div class="modal-footer flex items-center py-3 border-t border-gray-300">
-      <base-button :button-size="'small'" :button-theme="'danger'" :button-radius="'pill'">Cancel</base-button>
+      <base-button @action="closeModal" :button-size="'small'" :button-theme="'danger'" :button-radius="'pill'">Cancel</base-button>
       <base-button :class="'ms-auto me-3'" :button-theme="'solid'" :button-radius="'pill'" :button-size="'small'">Save
         Draft
       </base-button>

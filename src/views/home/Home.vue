@@ -15,6 +15,7 @@
             :button-fill="'flat'"
             :button-theme="'primary'"
             :button-radius="'pill'"
+            @action="openModal"
         >Create Invoice
         </BaseButton>
       </div>
@@ -25,7 +26,12 @@
       />
     </div>
   </div>
-  <invoice-modal :modal-title="'New Invoice'"/>
+  <transition name="modal">
+    <invoice-modal
+        v-if="showModal"
+        @close-modal="closeModal"
+        :modal-title="'New Invoice'"/>
+  </transition>
 </template>
 
 <script setup>
@@ -59,12 +65,21 @@ const filterList = ref([
   },
 ]);
 const data = ref([
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
-  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending' },
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
+  {id: '#DFD343', data: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
 ])
+
+// Invoice Modal
+const showModal = ref(false);
+const openModal = () => {
+  showModal.value = !showModal.value
+}
+const closeModal = () => {
+  showModal.value = false
+}
 </script>
 
 <style src="./Home.scss" scoped lang="scss"></style>

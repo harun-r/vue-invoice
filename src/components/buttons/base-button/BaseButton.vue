@@ -21,6 +21,11 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(['action'])
+
+const clickHandler = () =>{
+  emit('action')
+}
 // Button Fill Mode
 const buttonFillMode = computed(() => {
   return checkButtonFill(props.buttonFill)
@@ -93,6 +98,7 @@ const checkButtonSize = (size) => {
 
 <template>
   <button ref="button"
+          @click="clickHandler"
           :class="`base-default ${buttonFillMode} ${buttonTheme} ${buttonRadius} ${buttonSize}`">
     <span class="material-symbols-outlined mr-1" v-if="iconName">{{ iconName }}</span>
     <slot>button</slot>
