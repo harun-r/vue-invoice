@@ -23,7 +23,7 @@ const filterList = ref([
 ]);
 
 // Modal Close
-const closeModal = () =>{
+const closeModal = () => {
   emit('closeModal')
 }
 </script>
@@ -102,7 +102,8 @@ const closeModal = () =>{
               </div>
             </div>
             <div class="item-table-action">
-              <base-button :class="'w-full justify-center'" :button-theme="'primary'" :button-radius="'pill'" :button-size="'small'">Add New Item
+              <base-button :class="'w-full justify-center'" :button-theme="'primary'" :button-radius="'pill'"
+                           :button-size="'small'">Add New Item
               </base-button>
             </div>
           </div>
@@ -111,7 +112,8 @@ const closeModal = () =>{
       </form>
     </div>
     <div class="modal-footer flex items-center py-3 border-t border-gray-300">
-      <base-button @action="closeModal" :button-size="'small'" :button-theme="'danger'" :button-radius="'pill'">Cancel</base-button>
+      <base-button @action="closeModal" :button-size="'small'" :button-theme="'danger'" :button-radius="'pill'">Cancel
+      </base-button>
       <base-button :class="'ms-auto me-3'" :button-theme="'solid'" :button-radius="'pill'" :button-size="'small'">Save
         Draft
       </base-button>
