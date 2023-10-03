@@ -12,14 +12,12 @@ defineProps({
 const emit = defineEmits(['closeModal'])
 
 
-
 // Modal Close
 const closeModal = () => {
   emit('closeModal')
 }
 
 // Invoice data
-// const data = ref({billerAddress: null})
 const invoiceTerms = ref([
   {
     key: 30,
@@ -31,7 +29,8 @@ const invoiceTerms = ref([
   },
 ]);
 const invoiceDateUnix = ref(null);
-const dateOption = ref({ year: "numeric", month: "short", day: "numeric" });
+const invoiceDueDateUnix = ref(null);
+const dateOption = ref({year: "numeric", month: "short", day: "numeric"});
 const data = reactive({
   billerAddress: null,
   billerCity: null,
@@ -51,12 +50,17 @@ const data = reactive({
 })
 
 // Invoice Date
-onBeforeMount(() =>{
+onBeforeMount(() => {
   invoiceDateUnix.value = Date.now()
   data.invoiceDate = new Date(invoiceDateUnix.value).toLocaleDateString("en-us", dateOption.value)
 })
-
-const addInvoiceItem = () =>{
+// Invoice Due date on terms
+watch(() => data.invoiceTerms, (count) => {
+  const futureDate = new Date();
+  invoiceDueDateUnix.value = futureDate.setDate(futureDate.getDate() + parseInt(data.invoiceTerms))
+  data.invoiceDueDate = new Date(invoiceDueDateUnix.value).toLocaleDateString('en-us', dateOption.value)
+})
+const addInvoiceItem = () => {
   data.invoiceItemList.push({
     id: new Date(),
     name: null,
@@ -65,10 +69,15 @@ const addInvoiceItem = () =>{
     total: null
   })
 }
-const deleteInvoiceItem = (id) =>{
+const deleteInvoiceItem = (id) => {
   data.invoiceItemList = data.invoiceItemList.filter((item) => item.id !== id)
 }
+const invoiceDraft = () => {
 
+}
+const invoicePublish = () => {
+
+}
 </script>
 
 <template>
@@ -145,10 +154,15 @@ const deleteInvoiceItem = (id) =>{
                 <form-input v-model="item.price"/>
               </div>
               <div class="table-item w-[20%]">
-                <p class="text-xs font-medium mb-2 uppercase block text-center">${{ item.total = item.qty * item.price }}</p>
+                <p class="text-xs font-medium mb-3 uppercase block text-center">${{
+                    item.total = item.qty * item.price
+                  }}</p>
               </div>
               <div class="table-item w-[10%]">
-                <BaseButton @action="deleteInvoiceItem(item.id)" :button-theme="'text'" :button-fill="'flat'" :button-size="'small'">
+                <BaseButton @action="deleteInvoiceItem(item.id)"
+                            :class="'mb-3'"
+                            :button-theme="'text'" :button-fill="'flat'"
+                            :button-size="'small'">
                   <span class="material-symbols-outlined text-xl">delete</span>
                 </BaseButton>
               </div>
@@ -167,7 +181,7 @@ const deleteInvoiceItem = (id) =>{
     <div class="modal-footer flex items-center py-3 border-t border-gray-300">
       <base-button @action="closeModal" :button-size="'small'" :button-theme="'danger'" :button-radius="'pill'">Cancel
       </base-button>
-      <base-button @action="invoieDraft" :class="'ms-auto me-3'" :button-theme="'solid'" :button-radius="'pill'"
+      <base-button @action="invoiceDraft" :class="'ms-auto me-3'" :button-theme="'solid'" :button-radius="'pill'"
                    :button-size="'small'">Save
         Draft
       </base-button>
