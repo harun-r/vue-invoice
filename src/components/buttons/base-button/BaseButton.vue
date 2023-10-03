@@ -63,6 +63,9 @@ const checkButtonTheme = (theme) => {
   if (theme === 'danger') {
     return 'button-danger'
   }
+  if (theme === 'text') {
+    return 'button-text'
+  }
 }
 
 // Button Round

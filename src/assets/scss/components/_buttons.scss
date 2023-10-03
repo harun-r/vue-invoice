@@ -38,4 +38,7 @@
   &.button-danger{
     @apply bg-red-500 text-white
   }
+  &.button-text{
+    @apply p-0 text-xs
+  }
 }
