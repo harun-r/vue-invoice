@@ -5,14 +5,14 @@ import BaseButton from "@/components/buttons/base-button/BaseButton.vue";
 import DropdownSelect from "@/components/forms/dropdwon-select/DropdownSelect.vue";
 import {onBeforeMount, reactive, ref, watch} from "vue";
 import {uid} from 'uid'
-import { collection, addDoc } from "firebase/firestore"
+import {collection, addDoc} from "firebase/firestore"
+
 defineProps({
   modalTitle: {
     type: String,
   }
 })
 const emit = defineEmits(['closeModal'])
-
 
 // Modal Close
 const closeModal = () => {
@@ -213,9 +213,7 @@ const invoicePublish = () => {
                 <form-input v-model="item.price"/>
               </div>
               <div class="table-item w-[20%]">
-                <p class="text-xs font-medium mb-3 uppercase block text-center">${{
-                    item.total = item.qty * item.price
-                  }}</p>
+                <p class="text-xs font-medium mb-3 uppercase block text-center">${{ item.total = item.qty * item.price}}</p>
               </div>
               <div class="table-item w-[10%]">
                 <BaseButton @action="deleteInvoiceItem(item.id)"
@@ -239,18 +237,16 @@ const invoicePublish = () => {
       <div class="modal-footer flex items-center py-3 border-t border-gray-300">
         <base-button @action="closeModal" :button-size="'small'" :button-theme="'danger'" :button-radius="'pill'">Cancel
         </base-button>
-        <base-button :button-type="'submit'" @action="invoiceDraft" :class="'ms-auto me-3'" :button-theme="'solid'" :button-radius="'pill'"
+        <base-button :button-type="'submit'" @action="invoiceDraft" :class="'ms-auto me-3'" :button-theme="'solid'"
+                     :button-radius="'pill'"
                      :button-size="'small'">Save
           Draft
         </base-button>
-        <base-button :button-type="'submit'" @action="invoicePublish" :button-theme="'primary'" :button-radius="'pill'" :button-size="'small'">
+        <base-button :button-type="'submit'" @action="invoicePublish" :button-theme="'primary'" :button-radius="'pill'"
+                     :button-size="'small'">
           Create Invoice
         </base-button>
       </div>
     </form>
   </div>
 </template>
-
-<style scoped lang="scss">
-
-</style>
