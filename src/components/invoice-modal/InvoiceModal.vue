@@ -1,9 +1,11 @@
 <script setup>
+import db from "@/firebase/firbaseInt";
 import FormInput from "@/components/forms/form-input/FormInput.vue";
 import BaseButton from "@/components/buttons/base-button/BaseButton.vue";
 import DropdownSelect from "@/components/forms/dropdwon-select/DropdownSelect.vue";
-import {onBeforeMount, onMounted, reactive, ref, watch} from "vue";
-
+import {onBeforeMount, reactive, ref, watch} from "vue";
+import {uid} from 'uid'
+import { collection, addDoc } from "firebase/firestore"
 defineProps({
   modalTitle: {
     type: String,
@@ -30,6 +32,9 @@ const invoiceTerms = ref([
 ]);
 const invoiceDateUnix = ref(null);
 const invoiceDueDateUnix = ref(null);
+const invoicePending = ref(null);
+const invoiceDrafts = ref(null);
+const invoiceTotal = ref(0);
 const dateOption = ref({year: "numeric", month: "short", day: "numeric"});
 const data = reactive({
   billerAddress: null,
@@ -72,11 +77,65 @@ const addInvoiceItem = () => {
 const deleteInvoiceItem = (id) => {
   data.invoiceItemList = data.invoiceItemList.filter((item) => item.id !== id)
 }
-const invoiceDraft = () => {
+const calInvoiceTotal = () => {
+  invoiceTotal.value = 0;
+  data.invoiceItemList.forEach((item) => {
+    invoiceTotal.value += item.total
+  })
+}
+const uploadInvoice = async () => {
+  if (data.invoiceItemList.length <= 0) {
+    alert("Please ensure you filled out work items!")
+    return;
+  }
+  calInvoiceTotal()
+  //
+  // const database = db.collection('invoice').doc()
+  //
+  // await database.set({
+  //
+  // })
+
+  console.log('start')
+
+  const colRef = collection(db, 'invoice')
+  // data to send
+  const dataObj = {
+    invoiceId: uid(6),
+    billerAddress: data.billerAddress,
+    billerCity: data.billerCity,
+    billerZipCode: data.billerZipCode,
+    billerCountry: data.billerCountry,
+    clientName: data.clientName,
+    clientEmail: data.clientEmail,
+    clientAddress: data.clientAddress,
+    clientCity: data.clientCity,
+    clientZipCode: data.clientZipCode,
+    clientCountry: data.clientCountry,
+    invoiceDate: data.invoiceDate,
+    invoiceDueDate: data.invoiceDueDate,
+    invoiceTerms: data.invoiceTerms,
+    invoiceDesc: data.invoiceDesc,
+    invoiceItemList: data.invoiceItemList,
+    invoiceTotal: invoiceTotal.value,
+    invoicePending: invoicePending.value,
+    invoiceDraft: invoiceDrafts.value,
+    invoicePaid: null,
+  }
+
+  await addDoc(colRef, dataObj)
+  console.log('end')
 
 }
+const submitInvoice = () => {
+  uploadInvoice()
+  console.log('submit')
+}
+const invoiceDraft = () => {
+  invoiceDrafts.value = true
+}
 const invoicePublish = () => {
-
+  invoicePending.value = true
 }
 </script>
 
@@ -85,8 +144,8 @@ const invoicePublish = () => {
     <div class="head">
       <h3 class="text-2xl font-medium ">{{ modalTitle }}</h3>
     </div>
-    <div class="form mt-8 pr-3 pl-1 max-h-[calc(100vh-145px)] overflow-y-auto">
-      <form @submit.prevent="submitInvoice">
+    <form @submit.prevent="submitInvoice">
+      <div class="form mt-8 pr-3 pl-1 max-h-[calc(100vh-145px)] overflow-y-auto">
         <div class="bill-form mb-6">
           <h3 class="text-cyan-600 font-medium text-base mb-4">Bill From</h3>
           <div class="form-row">
@@ -176,19 +235,19 @@ const invoicePublish = () => {
           </div>
 
         </div>
-      </form>
-    </div>
-    <div class="modal-footer flex items-center py-3 border-t border-gray-300">
-      <base-button @action="closeModal" :button-size="'small'" :button-theme="'danger'" :button-radius="'pill'">Cancel
-      </base-button>
-      <base-button @action="invoiceDraft" :class="'ms-auto me-3'" :button-theme="'solid'" :button-radius="'pill'"
-                   :button-size="'small'">Save
-        Draft
-      </base-button>
-      <base-button @action="invoicePublish" :button-theme="'primary'" :button-radius="'pill'" :button-size="'small'">
-        Create Invoice
-      </base-button>
-    </div>
+      </div>
+      <div class="modal-footer flex items-center py-3 border-t border-gray-300">
+        <base-button @action="closeModal" :button-size="'small'" :button-theme="'danger'" :button-radius="'pill'">Cancel
+        </base-button>
+        <base-button :button-type="'submit'" @action="invoiceDraft" :class="'ms-auto me-3'" :button-theme="'solid'" :button-radius="'pill'"
+                     :button-size="'small'">Save
+          Draft
+        </base-button>
+        <base-button :button-type="'submit'" @action="invoicePublish" :button-theme="'primary'" :button-radius="'pill'" :button-size="'small'">
+          Create Invoice
+        </base-button>
+      </div>
+    </form>
   </div>
 </template>
 

@@ -18,6 +18,10 @@ const props = defineProps({
   buttonSize: {
     type: String,
     default: 'medium'
+  },
+  buttonType:{
+    type: String,
+    default: 'button'
   }
 });
 
@@ -101,6 +105,7 @@ const checkButtonSize = (size) => {
 
 <template>
   <button ref="button"
+          :type="buttonType"
           @click="clickHandler"
           :class="`base-default ${buttonFillMode} ${buttonTheme} ${buttonRadius} ${buttonSize}`">
     <span class="material-symbols-outlined mr-1" v-if="iconName">{{ iconName }}</span>
