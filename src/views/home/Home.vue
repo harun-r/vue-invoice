@@ -81,8 +81,6 @@ const closeModal = () => {
 onMounted(() => {
     getInvoiceData()
 })
-
-
 const dataInvoice = computed(()=> store.state.invoiceData)
 const getInvoiceData = async () =>{
   await store.dispatch('GET_INVOICE')

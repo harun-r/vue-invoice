@@ -13,10 +13,10 @@ const store = createStore({
         }
     },
     actions: {
-        async GET_INVOICE({commit}, state) {
+        async GET_INVOICE({commit, state}) {
             const results = await getDocs(collection(db, 'invoice'));
             results.forEach((doc) => {
-                if(!state?.invoiceData.some((invoice) => invoice.docId === doc.id)){
+                if(!state.invoiceData.some((invoice) => invoice.docId === doc.id)){
                     const data = {
                         docId: doc.id,
                         invoiceId: doc.data().invoiceId,

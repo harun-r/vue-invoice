@@ -2,7 +2,7 @@
   <div class="invoice-table">
     <div class="row-item flex items-center bg-white rounded mb-2 p-0" v-for="(row, index) in data">
       <div class="col-item p-3 w-full">
-        <p class="font-medium uppercase">#{{ row.invoiceId }} {{index}}</p>
+        <p class="font-medium uppercase">#{{ row.invoiceId }}</p>
       </div>
       <div class="col-item p-3 w-full">
         <p>{{ row.invoiceDate }}</p>
