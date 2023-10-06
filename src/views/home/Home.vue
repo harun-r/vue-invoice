@@ -37,9 +37,12 @@
 <script setup>
 import BaseButton from "@/components/buttons/base-button/BaseButton.vue";
 import DropdownSelect from "@/components/forms/dropdwon-select/DropdownSelect.vue";
-import {ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import InvoiceTable from "@/components/invoice-table/InvoiceTable.vue";
 import InvoiceModal from "@/components/invoice-modal/InvoiceModal.vue";
+import db from "@/firebase/firbaseInt";
+import {getDocs, collection, query} from "firebase/firestore";
+import store from "@/store";
 
 const filterValue = ref('')
 const filterList = ref([
@@ -80,6 +83,16 @@ const openModal = () => {
 const closeModal = () => {
   showModal.value = false
 }
+
+// Data Loaded
+onMounted(() => {
+    getInvoiceData()
+})
+const dataInvoice = computed(()=> store.state.invoiceData)
+const getInvoiceData = async () =>{
+  await store.dispatch('GET_INVOICE')
+}
+
 </script>
 
 <style src="./Home.scss" scoped lang="scss"></style>
