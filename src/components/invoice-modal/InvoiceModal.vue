@@ -117,6 +117,8 @@ const uploadInvoice = async () => {
     invoiceTerms: data.invoiceTerms,
     invoiceDesc: data.invoiceDesc,
     invoiceItemList: data.invoiceItemList,
+    invoiceDateUnix: invoiceDueDateUnix.value,
+    invoiceDueDateUnix: invoiceDueDateUnix.value,
     invoiceTotal: invoiceTotal.value,
     invoicePending: invoicePending.value,
     invoiceDraft: invoiceDrafts.value,

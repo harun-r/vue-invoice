@@ -1,5 +1,5 @@
 <template>
-  <div class="home-wrap">
+  <div class="home-wrap max-w-screen-xl m-auto">
     <div class="page-head flex items-start justify-between">
       <div class="left">
         <h3 class="text-2xl font-medium">Invoice</h3>
@@ -22,7 +22,7 @@
     </div>
     <div class="table-wrap mt-8">
       <invoice-table
-          :data="data"
+          :data="dataInvoice"
       />
     </div>
   </div>
@@ -37,7 +37,7 @@
 <script setup>
 import BaseButton from "@/components/buttons/base-button/BaseButton.vue";
 import DropdownSelect from "@/components/forms/dropdwon-select/DropdownSelect.vue";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, onUpdated, ref} from "vue";
 import InvoiceTable from "@/components/invoice-table/InvoiceTable.vue";
 import InvoiceModal from "@/components/invoice-modal/InvoiceModal.vue";
 import db from "@/firebase/firbaseInt";
@@ -67,13 +67,6 @@ const filterList = ref([
     value: '4'
   },
 ]);
-const data = ref([
-  {id: 1, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
-  {id: 2, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
-  {id: 3, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
-  {id: 4, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
-  {id: 5, invoiceId: '#DFD343', date: 'due sun 21, 2023', name: 'John', amount: 30, status: 'pending'},
-])
 
 // Invoice Modal
 const showModal = ref(false);
@@ -88,11 +81,12 @@ const closeModal = () => {
 onMounted(() => {
     getInvoiceData()
 })
+
+
 const dataInvoice = computed(()=> store.state.invoiceData)
 const getInvoiceData = async () =>{
   await store.dispatch('GET_INVOICE')
 }
-
 </script>
 
 <style src="./Home.scss" scoped lang="scss"></style>
